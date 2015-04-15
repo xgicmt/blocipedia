@@ -1,0 +1,23 @@
+<div class="content contentForms">
+
+<h1>Create a new Public Wiki</h1>
+<%= form_for @wiki do |f| %>
+<p>
+<%= f.label :title %><br>
+<%= f.text_field :title, placeholder: "Enter Wiki Title" %>
+</p>
+
+<p>
+<%= f.label :body %><br>
+<%= f.text_area :body, rows: 8, cols: 45, placeholder: "Enter Wiki Body Text" %>
+</p>
+<p>
+<%= f.label :private, class: 'checkbox' do %>
+<%= f.check_box :private %> Make this wiki Private
+</p>
+<% end %>
+
+<%= f.submit "Save", class: 'action' %>
+<% end %>
+
+</div>
