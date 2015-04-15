@@ -36,7 +36,7 @@ gem 'figaro', '1.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 group :production do
- gem 'pr'
+ gem 'pg'
  gem 'rails_12factor'
 end
 group :development, :test do
