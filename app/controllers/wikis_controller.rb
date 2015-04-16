@@ -1,5 +1,6 @@
 class WikisController < ApplicationController
   def index
+    @wikis = Wiki.all
   end
 
   def show
@@ -21,8 +22,18 @@ class WikisController < ApplicationController
   end
 
   def edit
+    @wiki = Wiki.find(params[:id])
   end
-
+  def update
+    @wiki = Wiki.find(params[:id])
+      if @wiki.update_attributes(params.require(:wiki).permit(:title, :body, :private))
+        redirect_to @wiki
+      else
+        flash[:error] = "Error saving Wiki, try again"
+        render :show
+      end
+  end
+  
   def delete
   end
 end
