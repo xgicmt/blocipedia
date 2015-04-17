@@ -4,9 +4,10 @@
 <h1><%= @wiki.title %></h1>
 <p><%= markdown_to_html @wiki.body %></p>
 
-<p>Last Edited by <%= @wiki.user_id %>
+<p>Created by <%= @wiki.user.name %></p>
+<p>Last edited by <%= %>
 </div>
-
+<% if current_user %>
 <div class="splitContentRight">
 <%= form_for @wiki do |f| %>
 <p><%= f.label :title %><br>
@@ -22,6 +23,7 @@
     <%# end %>
   <%# end %>
   <%= f.submit "Edit" %>
+<% end %>
 <% end %>
 </div>
 </div>

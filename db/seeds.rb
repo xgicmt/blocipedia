@@ -27,7 +27,7 @@ users = User.all
  	  title:     Faker::Lorem.sentence,
  	  body:      Faker::Lorem.paragraph,
  	  private:   false,
- 	  user_id:   users.sample
+ 	  user:   users.sample
  	   )
 end
 wikis = Wiki.all
@@ -37,7 +37,7 @@ wikis = Wiki.all
 		title:    Faker::Lorem.sentence,
 		body:     Faker::Lorem.paragraph,
 		private:  true,
-		user_id:  users.sample
+		user:  users.sample
 		)
 end
 #create an admin user

@@ -1,6 +1,10 @@
 class WikisController < ApplicationController
   def index
-    @wikis = Wiki.all
+    @wikis = Wiki.order("created_at DESC").all
+    
+    #@user = @wiki.user_id
+    #@wiki = @wikis.user_id
+    #@user = @wikis.user_id
   end
 
   def show
@@ -12,7 +16,8 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = Wiki.new(params.require(:wiki).permit(:title, :body, :private))
+    
+    @wiki = current_user.wikis.new(params.require(:wiki).permit(:title, :body, :private, :user_id))
     if @wiki.save
       redirect_to @wiki, notice: "Wiki saved"
     else
