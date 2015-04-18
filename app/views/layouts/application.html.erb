@@ -11,12 +11,13 @@
 <h2 id="blocLogo">Blocipedia Logo</h2>
 <ul class="topNav">
 <li><%= link_to("Browse Wikis", '/') %></li>
+<li><%= link_to("Upgrade to Pro", new_charge_path) %> </li>
 </ul>
 
 <% if current_user %>
-<%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+<%= link_to "Log Out", destroy_user_session_path, class: 'logButton', method: :delete %>
 <% else %>
-<%= link_to "Log In", new_user_session_path%>
+<%= link_to "Log In", new_user_session_path, class: 'logButton'%>
 <% end %>
 </header>
        <div class="notice"><%= notice %></div>

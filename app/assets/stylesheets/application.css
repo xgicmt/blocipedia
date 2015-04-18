@@ -77,7 +77,7 @@ h2{
 	padding-left:25px;
 	font-size:28px;
 }
-header a{
+.logButton{
 	position:absolute;
 	right:10px;
 	top:17px;
@@ -113,10 +113,17 @@ header a{
 }
 .topNav{
 	position:absolute;
-	top:8px;
-	left:200px;
-	width:300px;
+	top:18px;
+	left:35%;
 }
+.topNav li{
+	display:inline;
+	padding:0 15px;
+}
+.topNav li a{
+	color:white;
+}
+
 .finePrint{
 	font-size:12px;
 	text-decoration:underline;

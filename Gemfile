@@ -27,6 +27,7 @@ gem 'faker'
 gem 'pundit'
 gem 'figaro', '1.0'
 gem 'redcarpet'
+gem 'stripe'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

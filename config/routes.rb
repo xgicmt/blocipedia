@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   resources :wikis
   devise_for :users
-
+  resources :charges, only: [:new, :create]
   authenticated :user do
     root to: 'wikis#index', as: :authenticated_root
   end
