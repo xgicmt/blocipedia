@@ -117,3 +117,9 @@ header a{
 	left:200px;
 	width:300px;
 }
+.finePrint{
+	font-size:12px;
+	text-decoration:underline;
+	font-style:italic;
+	margin-bottom:15px;
+}

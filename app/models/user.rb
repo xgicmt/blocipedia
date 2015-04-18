@@ -4,4 +4,23 @@ class User < ActiveRecord::Base
   has_many :wikis
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
+
+         after_initialize :init
+         
+         def init
+         	self.role ||= 'standard'
+         end
+
+         def admin?
+         	role == 'admin'
+         end
+
+         def premium?
+         	role == 'premium'
+         end
+
+         def standard?
+         	role == 'standard'
+         end
+
 end
