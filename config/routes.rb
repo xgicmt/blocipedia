@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   resources :wikis
   devise_for :users
 
-  #authenticated :user do
-  #  root to: 'wiki#index', as: :authenticated_root
-  #end
+  authenticated :user do
+    root to: 'wikis#index', as: :authenticated_root
+  end
 
     root to: 'welcome#index'
   
