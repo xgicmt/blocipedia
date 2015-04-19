@@ -1,14 +1,14 @@
 class WikisController < ApplicationController
   def index
-    @wikis = Wiki.order("created_at DESC").all
-    
-    #@user = @wiki.user_id
-    #@wiki = @wikis.user_id
-    #@user = @wikis.user_id
+    if !current_user || current_user.role == 'standard'
+      @wikis = Wiki.where(private: false).order('created_at DESC')
+    else current_user.role == 'admin' || 'premium'
+      @wikis = Wiki.order('created_at DESC').all
+    end
   end
 
   def show
-    @wiki = Wiki.find(params[:id])
+      @wiki = Wiki.find(params[:id])
   end
 
   def new
@@ -24,6 +24,7 @@ class WikisController < ApplicationController
       flash[:error] = "Error creating Wiki. Try again."
       render :new
     end
+
   end
 
   def edit
@@ -51,4 +52,6 @@ class WikisController < ApplicationController
       render :show
     end
   end
+
+
 end

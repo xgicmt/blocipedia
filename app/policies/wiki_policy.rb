@@ -1,11 +1,15 @@
 class WikiPolicy < ApplicationPolicy
 
-def destroy?
+  def destroy?
     user.present? && (record.user == user || user.admin?)
-end
+  end
 
-def update?
-	user.present?
-end
+  def update?
+    user.present?
+  end
+
+  def private?
+    current_user.role == 'premium' || 'admin'
+  end
 
 end

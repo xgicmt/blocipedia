@@ -25,11 +25,11 @@
 <%= f.label :body %><br>
 <%= f.text_area :body, rows: 8, placeholder: '@wiki.description' %>
 </p>
-  <%# if user.role == "Admin" || "premium" %>
-    <%#= f.label :private, class: 'checkbox' do %>
-    <%#= f.check_box :private %> <!--Convert to Private Wiki-->
-    <%# end %>
-  <%# end %>
+  <% if current_user.role == "admin" || "premium" %>
+    <%= f.label :private, class: 'checkbox' do %>
+    Convert to Private Wiki <%= f.check_box :private %> 
+    <% end %>
+  <% end %>
   <%= f.submit "Edit" %>
 <% end %>
 <% end %>

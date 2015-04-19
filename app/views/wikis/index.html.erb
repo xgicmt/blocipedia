@@ -4,14 +4,23 @@
 <% if current_user %>
 <%= link_to("Create a Wiki", new_wiki_path, class: 'linkButton') %>
 <% end %>
-<% @wikis.each do |wiki| %>
-<div class="indexLinks"><%= link_to wiki.title, wiki %> <span class="smaller">Created by 
-<% if wiki.user.name == nil %>
-<%= wiki.user.email %></span></div>
-<% else %>
-<%= wiki.user.name %></span></div>
-<% end %>
-<% end %>
+   <% @wikis.each do |wiki| %>
+     <% if wiki.private == true %>
+       <div class="indexLinks private"><%= link_to wiki.title, wiki %> <span class="smaller">Created by 
+         <% if wiki.user.name == nil %>
+           <%= wiki.user.email %></span></div>
+         <% else %>
+           <%= wiki.user.name %></span></div>
+         <% end %>
+      <% else %>
+       <div class="indexLinks public"><%= link_to wiki.title, wiki %> <span class="smaller">Created by 
+         <% if wiki.user.name == nil %>
+           <%= wiki.user.email %></span></div>
+         <% else %>
+           <%= wiki.user.name %></span></div>
+         <% end %>
+      <% end %>
+   <% end %>
 </div>
 </div>
 

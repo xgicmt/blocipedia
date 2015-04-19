@@ -18,9 +18,15 @@
 <div class="rightColumn">
 <p>With the premium plan you'll be able to create private wikis that can only be viewed and updated by your team.</p>
 <div class="nextLine">
+<% if current_user %>
 <%= link_to new_charge_path, class: "loginButton" do %>
 <div class="imageButton"><p>Sign Up for a Premium Account</p></div>
-<% end %>
+  <% end %>
+<% else %>
+<%= link_to new_user_registration_path, class: "loginButton" do %>
+<div class="imageButton"><p>Sign Up for a Premium Account</p></div>
+  <% end %>
+ <% end %>
 </div>
 </div>
 
