@@ -1,37 +1,56 @@
 <div class="content">
-<div class="splitContentLeft">
-
-<h1><%= @wiki.title %></h1>
-<p><%= markdown_to_html @wiki.body %></p>
-<% if @wiki.user.name == nil %>
-<p>Created by <%= @wiki.user.email %></p>
-<% else %>
-<p>Created by <%= @wiki.user.name %></p>
-<% end %>
-
-<p>Last edited by <%= %></p>
+  <div class="splitContentLeft">
+    <div class="wikiState">
+    <h1><%= @wiki.title %></h1>
+    <p><%= markdown_to_html @wiki.body %></p>
+    <hr>
+     <% if @wiki.user.name == nil %>
+       <p>Created by <%= @wiki.user.email %></p>
+     <% else %>
+       <p>Created by <%= @wiki.user.name %></p>
+       <p>Last edited by <%= @last_modified %></p>
+     <% end %>
+    </div>
+     <% if @collaborators %> 
+     <h4> Collaborators </h4>
+         <% @collaborators.each do |collaborator| %>
+         <p><%= @collaborator.email %></p>
+         <% end %>
+      <% end %>
 <%# if current_user && current_user.id  == @wiki.user.id %>
-<% if policy(@wiki).destroy? %>
-    <p><%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete the Wiki?' } %></p>
-  <% end %>
-</div>
+     <% if policy(@wiki).destroy? %>
+       <p><%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete the Wiki?' } %></p>
+     <% end %>
+       <% @users.each do |user| %>
+         <p><%= "#{user.name} || #{hide_email(user.email)}" %></p>
+       <% end %>
+  </div>
+
 <% if policy(@wiki).update? %>
-<div class="splitContentRight">
-<%= form_for @wiki do |f| %>
-<p><%= f.label :title %><br>
-<%= f.text_field :title, placeholder: ' @wiki.title' %>
-</p>
-<p>
-<%= f.label :body %><br>
-<%= f.text_area :body, rows: 8, placeholder: '@wiki.description' %>
-</p>
-  <% if current_user.role == "admin" || "premium" %>
-    <%= f.label :private, class: 'checkbox' do %>
-    Convert to Private Wiki <%= f.check_box :private %> 
+  <div class="splitContentRight">
+    <% if policy(@wiki).private? %>
+      <div class="addCollaborators"
+        <%= form_tag :url => add_collaborator_path, method: :post do %>
+        <% @users.each do |user| %>
+          <%= hide_email(user.email) %><%= check_box_tag :user_id, user.id %> 
+        <% end %>
+          <%= submit_tag "Add Collaborator" %>
+        <% end %>
+    <% end %><!--END COLLABORATORS-->
+    </div>
+    <%= form_for @wiki do |f| %>
+      <p><%= f.label :title %><br>
+      <%= f.text_field :title, placeholder: ' @wiki.title' %></p>
+      <p><%= f.label :body %><br>
+      <%= f.text_area :body, rows: 8, placeholder: '@wiki.description' %></p>
+  <%= f.hidden_field :modified_by, :value => current_user.id%>
+        <% if current_user.role == "admin" || "premium" %>
+          <%= f.label :private, class: 'checkbox' do %>
+          Convert to Private Wiki <%= f.check_box :private %> 
+          <% end %>
+        <% end %>
+      <%= f.submit "Edit" %>
     <% end %>
-  <% end %>
-  <%= f.submit "Edit" %>
-<% end %>
 <% end %>
 </div>
 </div>

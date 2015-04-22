@@ -11,6 +11,12 @@
 	padding: 10px 10px;
 	background-color:lightgrey;
 }
+.private{
+    background-color:pink;
+}
+.public{
+    background-color:lightgreen;
+}
 .indexLinks a{
 	color:black;
 	text-decoration:underline;
@@ -22,6 +28,10 @@
 	width:50%;
 	text-align:left;
 	float:left;
+}
+.wikiState{
+    border:black solid 2px;
+    padding:10px
 }
 .smaller{
 	font-size:12px;

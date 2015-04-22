@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   authenticated :user do
     root to: 'wikis#index', as: :authenticated_root
   end
-
+ post 'add_collaborator', to: 'wikis#add_collaborator'
  get 'downgrade', to: 'user#downgrade' 
 
     root to: 'welcome#index'

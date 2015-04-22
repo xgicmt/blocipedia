@@ -7,26 +7,27 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<header>
-<h2 id="blocLogo">Blocipedia Logo</h2>
-<ul class="topNav">
-<li><%= link_to("Browse Wikis", '/') %></li>
-<% if !current_user %>
-<% elsif current_user && current_user.role != 'premium' %>
-<li><%= link_to("Upgrade to Pro", new_charge_path) %> </li>
-<% end %>
-<% if current_user && current_user.role == 'premium' %>
-<li> <%= link_to "Downgrade your Account", controller: "user", action: "downgrade", data: { confirm: 'Are you sure? Downgrading will render all of your Private Wikis Public!' }  %>
-<%#= link_to "Downgrade your account", users_path, data: {confirm: 'Are you sure you want to downgrade your account? All of your private wikis will become public!'} %></li>
-<% end %>
-</ul>
+  <header>
+    <h2 id="blocLogo">Blocipedia Logo</h2>
+    <ul class="topNav">
+      <li><%= link_to("Browse Wikis", '/') %></li>
+        <% if current_user && current_user.role != 'premium' %>
+          <li><%= link_to("Upgrade to Pro", new_charge_path) %> </li>
+        <% end %>
+      
+        <% if current_user && current_user.role == 'premium' %>
+          <li> <%= link_to "Downgrade your Account", controller: "user", action: "downgrade", data: { confirm: 'Are you sure? Downgrading will render all of your Private Wikis Public!' }  %></li>
+        <% end %>
+    </ul>
 
-<% if current_user %>
-<%= link_to "Log Out", destroy_user_session_path, class: 'logButton', method: :delete %>
-<% else %>
-<%= link_to "Log In", new_user_session_path, class: 'logButton'%>
-<% end %>
-</header>
+    <div class='logButton'>
+     <% if current_user %>
+       <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+     <% else %>
+       <%= link_to "Log In", new_user_session_path %> <%= link_to "Sign Up", new_user_registration_path %>
+     <% end %>
+    </div>
+  </header>
        <div class="notice"><%= notice %></div>
        <div class="alert"><%= alert %></div>
 <%= yield %>

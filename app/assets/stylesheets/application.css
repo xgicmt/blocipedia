@@ -80,9 +80,11 @@ h2{
 .logButton{
 	position:absolute;
 	right:10px;
-	top:17px;
+	top:18px;
+}
+.logButton a{
 	color:white;
-	text-decoration:underline;
+	padding-right:10px;
 }
 .content{
 	width:80%;

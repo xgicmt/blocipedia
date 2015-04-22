@@ -1,14 +1,23 @@
 class WikisController < ApplicationController
   def index
-    if !current_user || current_user.role == 'standard'
+    @wikis = policy_scope(Wiki)
+=begin    if !current_user || current_user.role == 'standard'
       @wikis = Wiki.where(private: false).order('created_at DESC')
     else current_user.role == 'admin' || 'premium'
       @wikis = Wiki.order('created_at DESC').all
     end
+=end
   end
 
   def show
       @wiki = Wiki.find(params[:id])
+      @users = User.all
+
+        if @wiki.modified_by == nil
+          @last_modified = @wiki.user.name
+        else
+          @last_modified = User.find(@wiki.modified_by).name
+        end
   end
 
   def new
@@ -33,7 +42,7 @@ class WikisController < ApplicationController
   end
   def update
     @wiki = Wiki.find(params[:id])
-      if @wiki.update_attributes(params.require(:wiki).permit(:title, :body, :private))
+      if @wiki.update_attributes(params.require(:wiki).permit(:title, :body, :modified_by, :private))
         redirect_to @wiki
       else
         flash[:error] = "Error saving Wiki, try again"
@@ -53,5 +62,16 @@ class WikisController < ApplicationController
     end
   end
 
+
+        def add_collaborator
+          @wiki = Wiki.find(params[:id])
+          @collaborator = @wiki.collaborator.build(params.require(:collaborator).permit(:wiki_id, :user_id))
+
+          if @collaborator.save
+           flash[:notice] = "User Added"
+          else
+            flash[:error] = "Add User Failed"
+          end
+        end
 
 end

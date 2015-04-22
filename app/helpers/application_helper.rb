@@ -6,4 +6,8 @@ module ApplicationHelper
 	redcarpet = Redcarpet::Markdown.new(renderer, extenstions)
 	(redcarpet.render markdown).html_safe
   end
+
+   def hide_email(email)
+     email.split('@').first + '@xxxxx.com'
+      end
 end
