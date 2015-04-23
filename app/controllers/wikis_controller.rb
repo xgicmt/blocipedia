@@ -18,6 +18,8 @@ class WikisController < ApplicationController
         else
           @last_modified = User.find(@wiki.modified_by).name
         end
+
+      @collaborators = Collaborator.where(:wiki_id => @wiki).all
   end
 
   def new
@@ -64,11 +66,13 @@ class WikisController < ApplicationController
 
 
         def add_collaborator
-          @wiki = Wiki.find(params[:id])
-          @collaborator = @wiki.collaborator.build(params.require(:collaborator).permit(:wiki_id, :user_id))
+          @wiki = Wiki.find(params[:wiki_id])
+          #@collaborator = Collaborator.find(params)
+          @collaborator = @wiki.collaborators.build(params.require(:collaborator).permit(:wiki_id, :user_id => [:user_ids]))
 
           if @collaborator.save
-           flash[:notice] = "User Added"
+           flash[:notice] = "Collaborator Added"
+           redirect_to @wiki
           else
             flash[:error] = "Add User Failed"
           end

@@ -11,34 +11,36 @@
        <p>Last edited by <%= @last_modified %></p>
      <% end %>
     </div>
-     <% if @collaborators %> 
+     <%# if @wiki.collaborators %> 
      <h4> Collaborators </h4>
          <% @collaborators.each do |collaborator| %>
-         <p><%= @collaborator.email %></p>
+         <p><%= collaborator.user_id %></p>
          <% end %>
-      <% end %>
+      <%# end %>
 <%# if current_user && current_user.id  == @wiki.user.id %>
      <% if policy(@wiki).destroy? %>
        <p><%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete the Wiki?' } %></p>
      <% end %>
-       <% @users.each do |user| %>
-         <p><%= "#{user.name} || #{hide_email(user.email)}" %></p>
-       <% end %>
   </div>
 
 <% if policy(@wiki).update? %>
   <div class="splitContentRight">
     <% if policy(@wiki).private? %>
-      <div class="addCollaborators"
-        <%= form_tag :url => add_collaborator_path, method: :post do %>
+      <div class="addCollaborators">
+        <%= form_tag add_collaborator_path, method: :post do %>
+        <%= hidden_field_tag :wiki_id, @wiki.id %>
         <% @users.each do |user| %>
-          <%= hide_email(user.email) %><%= check_box_tag :user_id, user.id %> 
+          <% if user.id != current_user.id  %>
+            <%#= check_box_tag 'collaborators[user_ids]':user_id, :name => 'wiki[user.ids][]' %> 
+            <%= check_box_tag 'collaborator[user_ids][]', user.id %>
+            <%= hide_email(user.email) %>
+          <% end %>
         <% end %>
-          <%= submit_tag "Add Collaborator" %>
+        </div>
+          <%= submit_tag "Add Collaborator", class: 'collabBtn' %>
         <% end %>
     <% end %><!--END COLLABORATORS-->
-    </div>
-    <%= form_for @wiki do |f| %>
+        <%= form_for @wiki do |f| %>
       <p><%= f.label :title %><br>
       <%= f.text_field :title, placeholder: ' @wiki.title' %></p>
       <p><%= f.label :body %><br>
