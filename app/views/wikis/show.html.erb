@@ -11,12 +11,12 @@
        <p>Last edited by <%= @last_modified %></p>
      <% end %>
     </div>
-     <%# if @wiki.collaborators %> 
+     <% if @wiki.users %> 
      <h4> Collaborators </h4>
-         <% @wiki.collaborators.each do |collaborator| %>
+         <% @wiki.users.each do |collaborator| %>
          <p><%= collaborator.email %></p>
          <% end %>
-      <%# end %>
+      <% end %>
 <%# if current_user && current_user.id  == @wiki.user.id %>
      <% if policy(@wiki).destroy? %>
        <p><%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete the Wiki?' } %></p>
@@ -29,21 +29,22 @@
       <div class="addCollaborators">
         <%= form_tag add_collaborator_path , method: :post do %>
         <%= hidden_field_tag :wiki_id, @wiki.id %>
-        <%= hidden_field_tag :wiki_id, @wiki.id, name: 'collaborators[wiki_id]' %>
-        <%= hidden_field_tag 'collaborators[user_ids][]', nil %>
+        <%#= hidden_field_tag :wiki_id, @wiki.id, name: 'collaborators[wiki_id]' %>
+        <%= hidden_field_tag 'wiki[user_ids][]', nil %>
         <% @users.each do |user| %>
-          <% if user.id != current_user.id  %>
-            <%= check_box_tag :user_ids, user.id, false, name: 'collaborators[user_ids][]'%>
+          <%# if user.id != current_user.id  %>
+            <%= check_box_tag :user_ids, user.id, @wiki.users.include?(user), name: 'wiki[user_ids][]', class: 'collabChecks'%>
             <%#= check_box_tag 'collaborators[user_ids]':user_id, :name => 'wiki[user.ids][]' %> 
             <%#= check_box_tag :user_ids, user.id, false, name: 'wiki[user_ids][]'%>
             <%#= check_box_tag 'user_id[user_ids][]', user.id %>
-            <%= hide_email(user.email) %>
+            <%= label_tag hide_email(user.email) %>
           <% end %>
-        <% end %>
+        <%# end %>
         </div>
-          <%= submit_tag "Add Collaborator", class: 'collabBtn' %>
+          <%= submit_tag "Add Collaborator", id: 'collabBtn' %>
         <% end %>
     <% end %><!--END COLLABORATORS-->
+
         <%= form_for @wiki do |f| %>
       <p><%= f.label :title %><br>
       <%= f.text_field :title, placeholder: ' @wiki.title' %></p>

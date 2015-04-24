@@ -5,7 +5,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def update?
-    user.present?
+    edit?
   end
 
   def private?
@@ -15,6 +15,10 @@ class WikiPolicy < ApplicationPolicy
   def public?
   	wiki.private = false
   end
+  def edit?
+    record.user == user || user.admin? || user.shared_wikis.include?(record)
+  end
+
 
 class Scope
 	attr_reader :user, :scope
