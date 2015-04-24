@@ -13,8 +13,8 @@
     </div>
      <%# if @wiki.collaborators %> 
      <h4> Collaborators </h4>
-         <% @collaborators.each do |collaborator| %>
-         <p><%= collaborator.user_id %></p>
+         <% @wiki.collaborators.each do |collaborator| %>
+         <p><%= collaborator.email %></p>
          <% end %>
       <%# end %>
 <%# if current_user && current_user.id  == @wiki.user.id %>
@@ -27,12 +27,16 @@
   <div class="splitContentRight">
     <% if policy(@wiki).private? %>
       <div class="addCollaborators">
-        <%= form_tag add_collaborator_path, method: :post do %>
+        <%= form_tag add_collaborator_path , method: :post do %>
         <%= hidden_field_tag :wiki_id, @wiki.id %>
+        <%= hidden_field_tag :wiki_id, @wiki.id, name: 'collaborators[wiki_id]' %>
+        <%= hidden_field_tag 'collaborators[user_ids][]', nil %>
         <% @users.each do |user| %>
           <% if user.id != current_user.id  %>
+            <%= check_box_tag :user_ids, user.id, false, name: 'collaborators[user_ids][]'%>
             <%#= check_box_tag 'collaborators[user_ids]':user_id, :name => 'wiki[user.ids][]' %> 
-            <%= check_box_tag 'collaborator[user_ids][]', user.id %>
+            <%#= check_box_tag :user_ids, user.id, false, name: 'wiki[user_ids][]'%>
+            <%#= check_box_tag 'user_id[user_ids][]', user.id %>
             <%= hide_email(user.email) %>
           <% end %>
         <% end %>

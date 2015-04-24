@@ -67,8 +67,9 @@ class WikisController < ApplicationController
 
         def add_collaborator
           @wiki = Wiki.find(params[:wiki_id])
-          #@collaborator = Collaborator.find(params)
-          @collaborator = @wiki.collaborators.build(params.require(:collaborator).permit(:wiki_id, :user_id => [:user_ids]))
+          @collaborator = Collaborator.new(params.require(:collaborators).permit(:wiki_id,:user_id =>[:user_ids]))
+          #@collaborator = Collaborator.new(wiki_id: @wiki, user_id: params[:user_ids])
+          #@collaborator = @wiki.collaborators.build(params.require(:collaborator).permit(:wiki_id, :user_id => [:user_ids]))
 
           if @collaborator.save
            flash[:notice] = "Collaborator Added"
