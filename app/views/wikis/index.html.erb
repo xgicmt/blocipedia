@@ -4,7 +4,7 @@
 <% if current_user %>
 <%= link_to("Create a Wiki", new_wiki_path, class: 'linkButton') %>
 <% end %>
-   <% @wikis.each do |wiki| %>
+   <%@wikis.each do |wiki| %>
      <% if wiki.private == true %>
        <div class="indexLinks private"><%= link_to wiki.title, wiki %> <span class="smaller">Created by 
          <% if wiki.user.name == nil %>
@@ -21,6 +21,7 @@
          <% end %>
       <% end %>
    <% end %>
+      <%=  will_paginate %>
 </div>
 </div>
 

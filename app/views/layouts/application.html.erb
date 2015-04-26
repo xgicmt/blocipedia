@@ -28,8 +28,15 @@
      <% end %>
     </div>
   </header>
-       <div class="notice"><%= notice %></div>
-       <div class="alert"><%= alert %></div>
+  <% if flash[:notice] %>
+    <div class="notice">
+      <%= flash[:notice] %>
+    </div>
+      <% elsif flash[:alert] %>
+       <div class="alert">
+         <%= alert %>
+       </div>
+  <% end %>
 <%= yield %>
 
 </body>

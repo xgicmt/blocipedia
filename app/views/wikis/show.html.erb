@@ -11,10 +11,10 @@
        <p>Last edited by <%= @last_modified %></p>
      <% end %>
     </div>
-     <% if @wiki.users %> 
+     <% if @wiki.users.count > 0 %> 
      <h4> Collaborators </h4>
          <% @wiki.users.each do |collaborator| %>
-         <p><%= collaborator.email %></p>
+         <%= hide_email(collaborator.email) %><br>
          <% end %>
       <% end %>
 <%# if current_user && current_user.id  == @wiki.user.id %>
@@ -25,39 +25,36 @@
 
 <% if policy(@wiki).update? %>
   <div class="splitContentRight">
-    <% if policy(@wiki).private? %>
+        <%= form_for @wiki do |f| %>
+          <p><%= f.label :title %><br>
+          <%= f.text_field :title, placeholder: ' @wiki.title' %></p>
+          <p><%= f.label :body %><br>
+          <%= f.text_area :body, rows: 8, placeholder: '@wiki.description' %></p>
+          <%= f.hidden_field :modified_by, :value => current_user.id %>
+            <% if current_user.role != 'standard' %>
+              <%= f.label :private, class: 'checkbox' do %>
+              Private Wiki <%= f.check_box :private %> 
+              <% end %>
+            <% end %>
+        <%= f.submit "Edit" %>
+      <% end %>
+
+      <% if @wiki.private == true %>
       <div class="addCollaborators">
         <%= form_tag add_collaborator_path , method: :post do %>
         <%= hidden_field_tag :wiki_id, @wiki.id %>
-        <%#= hidden_field_tag :wiki_id, @wiki.id, name: 'collaborators[wiki_id]' %>
         <%= hidden_field_tag 'wiki[user_ids][]', nil %>
         <% @users.each do |user| %>
-          <%# if user.id != current_user.id  %>
-            <%= check_box_tag :user_ids, user.id, @wiki.users.include?(user), name: 'wiki[user_ids][]', class: 'collabChecks'%>
-            <%#= check_box_tag 'collaborators[user_ids]':user_id, :name => 'wiki[user.ids][]' %> 
-            <%#= check_box_tag :user_ids, user.id, false, name: 'wiki[user_ids][]'%>
-            <%#= check_box_tag 'user_id[user_ids][]', user.id %>
+            <% if user.role != 'admin' %>
+              <%= check_box_tag :user_ids, user.id, @wiki.users.include?(user), name: 'wiki[user_ids][]', class: 'collabChecks'%>
             <%= label_tag hide_email(user.email) %>
+            <%= submit_tag "Add Collaborator" %>
+            <% end %>
           <% end %>
-        <%# end %>
+          <%#= submit_tag "Add Collaborators", id: 'collabBtn' %>
         </div>
-          <%= submit_tag "Add Collaborator", id: 'collabBtn' %>
         <% end %>
     <% end %><!--END COLLABORATORS-->
-
-        <%= form_for @wiki do |f| %>
-      <p><%= f.label :title %><br>
-      <%= f.text_field :title, placeholder: ' @wiki.title' %></p>
-      <p><%= f.label :body %><br>
-      <%= f.text_area :body, rows: 8, placeholder: '@wiki.description' %></p>
-  <%= f.hidden_field :modified_by, :value => current_user.id%>
-        <% if current_user.role == "admin" || "premium" %>
-          <%= f.label :private, class: 'checkbox' do %>
-          Convert to Private Wiki <%= f.check_box :private %> 
-          <% end %>
-        <% end %>
-      <%= f.submit "Edit" %>
-    <% end %>
-<% end %>
+<% end # Policy Update End%>
 </div>
 </div>

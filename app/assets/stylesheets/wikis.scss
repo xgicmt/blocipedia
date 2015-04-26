@@ -11,6 +11,9 @@
 	padding: 10px 10px;
 	background-color:lightgrey;
 }
+.publicContent{
+    margin:auto;
+}
 .private{
     background-color:pink;
 }
@@ -147,4 +150,15 @@
     margin-left: 25px;
     position:relative;
     top:-24px;
+}
+.pagination{
+    background:lightgrey;
+    padding:10px;
+    text-align:center;
+    font-size:16px;
+    color:grey;
+    text-transform:uppercase;
+}
+.pagination a{
+    color:black;
 }

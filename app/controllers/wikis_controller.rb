@@ -1,6 +1,8 @@
 class WikisController < ApplicationController
   def index
+    #@wikis = Wiki.all.paginate(page: params[:page], per_page: 10)
     @wikis = policy_scope(Wiki)
+    @wikis= @wikis.paginate(page: params[:page], per_page: 10)
 =begin    if !current_user || current_user.role == 'standard'
       @wikis = Wiki.where(private: false).order('created_at DESC')
     else current_user.role == 'admin' || 'premium'
@@ -45,6 +47,7 @@ class WikisController < ApplicationController
   def update
     @wiki = Wiki.find(params[:id])
       if @wiki.update_attributes(params.require(:wiki).permit(:title, :body, :modified_by, :private))
+        flash[:notice] = "Your contribution has been documented."
         redirect_to @wiki
       else
         flash[:error] = "Error saving Wiki, try again"
@@ -73,10 +76,10 @@ class WikisController < ApplicationController
           #@collaborator = @wiki.collaborators.build(params.require(:collaborator).permit(:wiki_id, :user_id => [:user_ids]))
 
         
-           flash[:notice] = "Collaborator Added"
+           flash[:notice] = "Collaborator Modified"
            redirect_to @wiki
           else
-            flash[:error] = "Add User Failed"
+            flash[:error] = "Error, probably my fault, try again!"
           end
 
         end

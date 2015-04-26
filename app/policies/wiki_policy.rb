@@ -9,7 +9,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def private?
-    user.role == 'premium' || 'admin'
+    (user.role == 'premium' || 'admin') #record.user == user.shared_wikis.include?(record) || 
   end
 
   def public?
@@ -33,18 +33,25 @@ class Scope
 		wikis = []
 		if user.role == 'admin'
 			wikis = scope.all
+			#wikis = scope.paginate(page: params[:page], per_page: 10)
 		elsif 
 			user.role == 'premium'
 			  all_wikis = scope.all
 			  all_wikis.each do |wiki|
-			  	if wiki.private == false || wiki.user == user #|| wiki.user.include?(user)
+			  	if wiki.private == false || wiki.user == user || wiki.users.include?(user) #wiki.user.include?(user)
 			  		wikis << wiki #if the user is premium, only show them public wikis, or that private wikis they created or are collaborators on.
 			  	end
 			  end
 		else
-		wikis = Wiki.where(private: false).order('created_at DESC') 
+			  all_wikis = scope.all
+			  all_wikis.each do |wiki|
+			  	if wiki.private == false || wiki.users.include?(user)
+			  		wikis << wiki
+			  	end
+			  end
 		end
-      wikis
+		#wikis.reverse
+      wikis.reverse  #.paginate(page: params[:page], per_page: 10)
     end
 end
 end
