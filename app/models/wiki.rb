@@ -4,7 +4,7 @@ class Wiki < ActiveRecord::Base
   has_many :users, through: :collaborators
 
   def slug
-    title.downcase.gsub(/[!@%&"';:,.]/, '').gsub!(/[ ]/, '-')
+    title.downcase.gsub(/[!@%&"';:,.?]/, '').gsub!(/[ ]/, '-')
   end
 
   def to_param

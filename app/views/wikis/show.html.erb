@@ -2,7 +2,9 @@
   <div class="splitContentLeft">
     <div class="wikiState">
     <h1><%= @wiki.title %></h1>
-    <p><%= markdown_to_html @wiki.body %></p>
+    <div  id="wmd-preview" class="wmd-panel wmd-preview">
+    <%= markdown_to_html @wiki.body %>
+    </div>
     <hr>
      <% if @wiki.user.name == nil %>
        <p>Created by <%= @wiki.user.email %></p>
@@ -23,13 +25,15 @@
      <% end %>
   </div>
 
-<% if policy(@wiki).update? %>
+  <% if @wiki.private == false || policy(@wiki).update? %>
+
   <div class="splitContentRight">
         <%= form_for @wiki do |f| %>
           <p><%= f.label :title %><br>
           <%= f.text_field :title, placeholder: ' @wiki.title' %></p>
           <p><%= f.label :body %><br>
-          <%= f.text_area :body, rows: 8, placeholder: '@wiki.description' %></p>
+              <div id="wmd-button-bar"></div>
+          <%= f.text_area :body, rows: 8, class: "wmd-input", id:'wmd-input',placeholder: '@wiki.description' %></p>
           <%= f.hidden_field :modified_by, :value => current_user.id %>
             <% if current_user.role != 'standard' %>
               <%= f.label :private, class: 'checkbox' do %>
@@ -58,3 +62,16 @@
 <% end # Policy Update End%>
 </div>
 </div>
+<script>
+    var converter = Markdown.getSanitizingConverter();
+    var editor = new Markdown.Editor(converter);
+    editor.run();
+</script>
+<script> 
+//$(function() {
+//   $('#wiki_body').keyup(function() {
+//      $('#wikiShow').text($(this).val());
+// });
+//});
+//$document.getElementById('wikiShow').innerHTML = marked(getElementById('wiki_body')); 
+</script>

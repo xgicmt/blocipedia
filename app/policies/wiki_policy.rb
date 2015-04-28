@@ -13,10 +13,10 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def public?
-  	wiki.private = false
+  	record.private = false
   end
   def edit?
-    record.user == user || user.admin? || user.shared_wikis.include?(record)
+    record.user == user || user.admin? || user.shared_wikis.include?(record) 
   end
 
 

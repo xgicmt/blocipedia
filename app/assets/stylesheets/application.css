@@ -72,6 +72,11 @@ h2{
 	font-size:28px;
 
 }
+body{
+
+   /*background-image:url('http://upload.wikimedia.org/wikipedia/commons/c/c3/Podlaskie_-_Czarna_Bia%C5%82ostocka_-_Puszcza_Knyszy%C5%84ska_-_G%C3%B3ry_Czuma%C5%BCowskie_-_E_-_v-NW.JPG');*/
+   background-size:100%;
+}
 #blocLogo{
 	padding-top:10px;
 	padding-left:25px;
@@ -96,6 +101,7 @@ h2{
 	font-size:28px;
 	font-style:italic;
 }
+
 .contentForms{
 	text-align:left;
 }
