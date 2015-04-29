@@ -1,34 +1,32 @@
 <div class="content">
-<h1>Welcome to Blocipedia</h1>
-<p>Create and share Markdown Wikis</p>
-<div class="openingImage">
-</div>
+  <h1>Welcome to Blocipedia</h1>
+  <p>Create and share Markdown Wikis</p>
+    <div class="openingImage">
+      <h3 class="openText">How can we reduce our long term impact on the planet?  By using less of natural resources.</h3> 
+      <p>Use blocipedia, and the amount of paper you and your collegues use could conceivably be halved in the span of a month.  With that much paper savings, surely you can afford to upgrade to the full service version and help me pay for my daughters dental bills.  Because 8 cavities just sucks!</p>
+      <div class="leftColumn">
+        <p>Create as many public wikis as you want! Collaborate with friends and colleuges around the world.</p>
+       <div class="nextLine">
+         <%= link_to new_user_registration_path, class: "loginButton" do %>
+         <div class="imageButton"><p>Sign Up for a Free Account</p></div>
+         <% end %>
+         </div>
+       </div>
 
-
-<div class="leftColumn">
-<p>Create as many public wikis as you want! Collaborate with friends and colleuges around the world.</p>
-<div class="nextLine">
-<%= link_to new_user_registration_path, class: "loginButton" do %>
-<div class="imageButton"><p>Sign Up for a Free Account</p></div>
-<% end %>
+      <div class="rightColumn">
+        <p>With the premium plan you'll be able to create private wikis that can only be viewed and updated by your team.</p>
+        <div class="nextLine">
+        <% if current_user %>
+          <%= link_to new_charge_path, class: "loginButton" do %>
+          <div class="imageButton"><p>Sign Up for a Premium Account</p></div>
+        <% end %>
+        <% else %>
+          <%= link_to new_user_registration_path, class: "loginButton" do %> 
+            <div class="imageButton"><p>Sign Up for a Premium Account</p></div>
+          <% end %>
+        <% end %>
+        </div>
+       </div>
+     </div>
 </div>
-</div>
-
-
-<div class="rightColumn">
-<p>With the premium plan you'll be able to create private wikis that can only be viewed and updated by your team.</p>
-<div class="nextLine">
-<% if current_user %>
-<%= link_to new_charge_path, class: "loginButton" do %>
-<div class="imageButton"><p>Sign Up for a Premium Account</p></div>
-  <% end %>
-<% else %>
-<%= link_to new_user_registration_path, class: "loginButton" do %>
-<div class="imageButton"><p>Sign Up for a Premium Account</p></div>
-  <% end %>
- <% end %>
-</div>
-</div>
-
-
-</div>
+<div style="display:none;"><%= @background_class = 'welcomeBack' %></div>

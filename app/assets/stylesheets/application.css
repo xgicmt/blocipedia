@@ -70,12 +70,12 @@ height:50px;
 }
 h2{
 	font-size:28px;
-
 }
-body{
-
+html,body { height:100%; }
+.backClass{
    /*background-image:url('http://upload.wikimedia.org/wikipedia/commons/c/c3/Podlaskie_-_Czarna_Bia%C5%82ostocka_-_Puszcza_Knyszy%C5%84ska_-_G%C3%B3ry_Czuma%C5%BCowskie_-_E_-_v-NW.JPG');*/
    background-size:100%;
+   min-height:100%;
 }
 #blocLogo{
 	padding-top:10px;
@@ -94,7 +94,7 @@ body{
 .content{
 	width:80%;
 	margin:auto;
-	margin-top:25px;
+	padding-top:20px;
 	text-align:center;
 }
 .content h1{
@@ -103,7 +103,16 @@ body{
 }
 
 .contentForms{
+	position:absolute;
+	margin-left:10%;
+	width:50%;
+	margin-top:25px;
+	padding-left:25px;
+	padding-bottom:50px;
+	background:rgba(250,250,250,.8);
 	text-align:left;
+	border:2px solid white;
+	border-radius:25px;
 }
 .contentForms h2{
 	font-size:28px;
@@ -139,10 +148,10 @@ body{
 	margin-bottom:15px;
 }
 .alert{
+	position:relative;
 	width:60%;
 	margin:auto;
 	text-align:center;
-	margin-top:15px;
 	padding:10px;
 	background:rgba(155,100,100,1);
 	color:white;
@@ -151,10 +160,10 @@ body{
 	border:black 2px solid;
 }
 .notice{
+	position:relative;
 	width:60%;
 	margin:auto;
 	text-align:center;
-	margin-top:15px;
 	padding:10px;
 	background:rgba(100,155,100,1);
 	color:white;

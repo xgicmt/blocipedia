@@ -33,6 +33,7 @@
      <% end %>
     </div>
   </header>
+  <div class = "backClass <%= @background_class %>">
   <% if flash[:notice] %>
     <div class="notice">
       <%= flash[:notice] %>
@@ -43,6 +44,6 @@
        </div>
   <% end %>
 <%= yield %>
-
+</div>
 </body>
 </html>

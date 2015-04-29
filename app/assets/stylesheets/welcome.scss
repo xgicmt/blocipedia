@@ -1,49 +1,70 @@
-/* line 4, /Users/christhompson/code/blocipedia/app/assets/stylesheets/welcome.scss */
+
 .imageButton {
   display: table-cell;
   vertical-align: middle;
-  width: 100px;
+  width: 200px;
   height: 100px;
   border: black solid 2px;
   border-radius: 10px;
   text-align: center;
   text-decoration: none;
-  background-color: orange;
-  color: red;
+  color: blueviolet;
+  line-height:1.2em;
+  font-weight:bold;
+  font-size:22px;
+  background: rgb(205,235,142); /* Old browsers */
+  background: -moz-linear-gradient(45deg,  rgba(205,235,142,1) 0%, rgba(165,201,86,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(205,235,142,1)), color-stop(100%,rgba(165,201,86,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(45deg,  rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(45deg,  rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(45deg,  rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%); /* IE10+ */
+  background: linear-gradient(45deg,  rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', endColorstr='#a5c956',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+}
+.openingImage {
+  margin-top:20px;
+  width: 100%;
+  height:500px;
+  border: solid 1px gray;
+  background: rgba(200, 200, 200, 0.6);
+  margin-bottom: 25px;
+}
+.openText{
+  font-size:28px;
+  margin:25px;
+}
+.openingImage p{
+  padding:25px;
+  font-size:18px;
+  text-align:left;
 }
 
-/* line 16, /Users/christhompson/code/blocipedia/app/assets/stylesheets/welcome.scss */
 .loginButton {
   text-decoration: none;
 }
 
-/* line 19, /Users/christhompson/code/blocipedia/app/assets/stylesheets/welcome.scss */
-.openingImage {
-  width: 100%;
-  height: 300px;
-  border: solid 1px gray;
-  background-color: purple;
-  margin-bottom:25px;
-}
-.nextLine{
-  margin-left:35%;
+.nextLine {
+margin-left:10%;
 }
 /* line 25, /Users/christhompson/code/blocipedia/app/assets/stylesheets/welcome.scss */
 .leftColumn {
-  width: 50%;
+  width: 25%;
+  margin-left:15%;
   float: left;
-  margin:auto;
+  padding: 10px;
 }
 
-/* line 30, /Users/christhompson/code/blocipedia/app/assets/stylesheets/welcome.scss */
 .rightColumn {
-  width: 50%;
+  width: 25%;
   float:left;
-  margin:auto;
-
+  margin-left:15%;
+  padding: 10px;
 }
+
 .leftColumn p{
 	margin-bottom:25px;
+
 }
 .rightColumn p{
 	margin-bottom:25px;

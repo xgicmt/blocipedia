@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content wikiShow">
   <div class="splitContentLeft">
     <div class="wikiState">
     <h1><%= @wiki.title %></h1>
@@ -14,11 +14,15 @@
      <% end %>
     </div>
      <% if @wiki.users.count > 0 %> 
+     <div class="collabs">
      <h4> Collaborators </h4>
+     <ul>
          <% @wiki.users.each do |collaborator| %>
-         <%= hide_email(collaborator.email) %><br>
+         <li><%= hide_email(collaborator.email) %></li>
          <% end %>
       <% end %>
+      </ul>
+      </div>
 <%# if current_user && current_user.id  == @wiki.user.id %>
      <% if policy(@wiki).destroy? %>
        <p><%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete the Wiki?' } %></p>
@@ -61,6 +65,9 @@
     <% end %><!--END COLLABORATORS-->
 <% end # Policy Update End%>
 </div>
+</div>
+<div style="display:none;">
+<%= @background_class = 'wikiShowBack' %>
 </div>
 <script>
     var converter = Markdown.getSanitizingConverter();
