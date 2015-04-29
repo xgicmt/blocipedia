@@ -1,14 +1,8 @@
 class WikisController < ApplicationController
   def index
-    #@wikis = Wiki.all.paginate(page: params[:page], per_page: 10)
     @wikis = policy_scope(Wiki)
     @wikis= @wikis.paginate(page: params[:page], per_page: 10)
-=begin    if !current_user || current_user.role == 'standard'
-      @wikis = Wiki.where(private: false).order('created_at DESC')
-    else current_user.role == 'admin' || 'premium'
-      @wikis = Wiki.order('created_at DESC').all
-    end
-=end
+    @background_class = 'wikiIndexBack'
   end
 
   def show
@@ -22,10 +16,12 @@ class WikisController < ApplicationController
         end
 
       @collaborators = Collaborator.where(:wiki_id => @wiki).all
+      @background_class = 'wikiShowBack'
   end
 
   def new
     @wiki = Wiki.new
+    @background_class = 'wikiNewBack'
   end
 
   def create

@@ -15,8 +15,8 @@
   <header>
     <h2 id="blocLogo">Blocipedia Logo</h2>
     <ul class="topNav">
+      <li><%= link_to("Browse Wikis", '/') %></li>
         <% if current_user && current_user.role != 'premium' %>
-          <li><%= link_to("Browse Wikis", '/') %></li>
           <li><%= link_to("Upgrade to Pro", new_charge_path) %> </li>
         <% end %>
       
