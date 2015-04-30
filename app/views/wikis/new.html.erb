@@ -1,23 +1,25 @@
 <div class="content contentForms">
+    <h1>Create a new Public Wiki</h1>
+    <%= form_for @wiki do |f| %>
+      <p><%= f.label :title %><br>
+      <%= f.text_field :title, required: 'required', placeholder: "Enter Wiki Title" %></p>
+        <div id="wmd-button-bar"></div>
+      <p><%= f.label :body %><br>
+      <%= f.text_area :body, rows: 8, cols: 45, class: "wmd-input", id:'wmd-input', placeholder: "Enter Wiki Body Text" %></p>
+        <% if current_user.role != 'standard' %>
+          <p><%= f.label :private, class: 'checkbox' do %>
+          Make this wiki Private<%= f.check_box :private %></p>
+          <% end %>
+        <% end %>
+    <%= f.submit "Save", class: 'action' %>
+    <% end %>
 
-<h1>Create a new Public Wiki</h1>
-<%= form_for @wiki do |f| %>
-<p>
-<%= f.label :title %><br>
-<%= f.text_field :title, placeholder: "Enter Wiki Title" %>
-</p>
-
-<p>
-<%= f.label :body %><br>
-<%= f.text_area :body, rows: 8, cols: 45, placeholder: "Enter Wiki Body Text" %>
-</p>
-<p>
-<%= f.label :private, class: 'checkbox' do %>
-Make this wiki Private<%= f.check_box :private %> 
-</p>
-<% end %>
-
-<%= f.submit "Save", class: 'action' %>
-<% end %>
-
+   <div id="wmd-preview" class="wmd-panel wmd-preview "></div> 
 </div>
+
+
+<script>
+    var converter = Markdown.getSanitizingConverter();
+    var editor = new Markdown.Editor(converter);
+    editor.run();
+</script>

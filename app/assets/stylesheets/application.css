@@ -45,6 +45,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	font-family: 'Open Sans', sans-serif;
 }
 ol, ul {
 	list-style: none;
@@ -73,9 +74,9 @@ h2{
 }
 html,body { height:100%; }
 .backClass{
-   /*background-image:url('http://upload.wikimedia.org/wikipedia/commons/c/c3/Podlaskie_-_Czarna_Bia%C5%82ostocka_-_Puszcza_Knyszy%C5%84ska_-_G%C3%B3ry_Czuma%C5%BCowskie_-_E_-_v-NW.JPG');*/
    background-size:100%;
    min-height:100%;
+   padding-top:25px;
 }
 #blocLogo{
 	padding-top:10px;
@@ -101,7 +102,11 @@ html,body { height:100%; }
 	font-size:28px;
 	font-style:italic;
 }
-
+.content h2{
+	color:white;
+	text-shadow:2px 2px 15px #000;
+	margin-bottom:15px;
+}
 .contentForms{
 	position:absolute;
 	margin-left:10%;

@@ -2,7 +2,7 @@
 <h2>Current Wikis</h2>
 <div class="publicContent">
 <% if current_user %>
-<%= link_to("Create a Wiki", new_wiki_path, class: 'linkButton') %>
+<%= link_to("Create a Wiki", new_wiki_path, id: 'styled_button',class: 'linkButton') %>
 <% end %>
    <% @wikis.each do |wiki| %>
      <% if wiki.private == true %>

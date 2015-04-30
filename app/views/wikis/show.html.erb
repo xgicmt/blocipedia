@@ -36,7 +36,7 @@
         <%= f.text_field :title, placeholder: ' @wiki.title' %></p>
         <p><%= f.label :body %><br>
           <div id="wmd-button-bar"></div>
-            <%= f.text_area :body, rows: 8, class: "wmd-input", id:'wmd-input',placeholder: '@wiki.description' %></p>
+            <%= f.text_area :body, rows: 8, class: "wmd-input", id:'wmd-input', placeholder: '@wiki.description' %></p>
             <%= f.hidden_field :modified_by, :value => current_user.id %>
             <% if current_user.role != 'standard' %>
               <%= f.label :private, class: 'checkbox' do %>
@@ -58,7 +58,6 @@
             <%= submit_tag "Add Collaborator" %>
           <% end %>
         <% end %>
-           <%#= submit_tag "Add Collaborators", id: 'collabBtn' %>
     </div>
       <% end %>
     <% end %><!--END COLLABORATORS-->
