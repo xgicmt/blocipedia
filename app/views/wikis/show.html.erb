@@ -20,9 +20,10 @@
            <% @wiki.users.each do |collaborator| %>
              <li><%= hide_email(collaborator.email) %></li>
            <% end %>
-         </ul>
+         </ul>  
+      </div>
       <% end %>     
-  </div>
+
     <% if policy(@wiki).destroy? %>
       <p><%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete the Wiki?' } %></p>
     <% end %>
