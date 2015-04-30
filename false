@@ -1,0 +1,2 @@
+      invoke  active_record
+      create    db/migrate/20150430144636_add_default_setting_to_private_wiki.rb
