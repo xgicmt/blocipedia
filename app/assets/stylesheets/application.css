@@ -102,7 +102,7 @@ html,body { height:100%; }
 	font-size:28px;
 	font-style:italic;
 }
-.content h2{
+.contentTitle{
 	color:white;
 	text-shadow:2px 2px 15px #000;
 	margin-bottom:15px;

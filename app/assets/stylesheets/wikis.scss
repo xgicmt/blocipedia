@@ -16,7 +16,9 @@
 }
 .wikiNewBack{
     background-image: image-url('http://www.colorupinteractive.com/blocipedia_images/4428783413_4dcc833588_o_6.jpg');     
-
+}
+.chargesBack{
+    background-image: image-url('http://www.colorupinteractive.com/blocipedia_images/4428783413_4dcc833588_o_6.jpg');     
 }
 .wikiShow{
     background:rgba(255,255,255,1);
@@ -198,10 +200,15 @@ padding:20px;
     width:80%;
     margin-left:10%;
     }
+    .collabCheck{
+    display:inline-block;
+    }
 .addCollaborators label{
+   /* 
     margin-left: 25px;
     position:relative;
     top:-24px;
+    */
 }
 .pagination{
     background:lightgrey;

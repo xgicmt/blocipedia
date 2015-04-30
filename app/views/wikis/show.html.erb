@@ -43,7 +43,7 @@
               Private Wiki <%= f.check_box :private %> 
               <% end %>
             <% end %>
-    <%= f.submit "Edit" %>
+    <%= f.submit "Save Your Changes" %>
   <% end %>
 
   <% if @wiki.private == true %>
@@ -53,8 +53,7 @@
       <%= hidden_field_tag 'wiki[user_ids][]', nil %>
         <% @users.each do |user| %>
           <% if user.role != 'admin' %>
-            <%= check_box_tag :user_ids, user.id, @wiki.users.include?(user), name: 'wiki[user_ids][]', class: 'collabChecks'%>
-            <%= label_tag hide_email(user.email) %>
+            <%= check_box_tag :user_ids, user.id, @wiki.users.include?(user), name: 'wiki[user_ids][]', class: 'collabChecks'%><%= label_tag hide_email(user.email) %>
             <%= submit_tag "Add Collaborator" %>
           <% end %>
         <% end %>
